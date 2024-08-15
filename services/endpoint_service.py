@@ -6,7 +6,7 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
-from startup.database import db
+from utils.database import db
 
 
 class EndpointService:

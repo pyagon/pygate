@@ -6,9 +6,8 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
-import sys
 from pymongo import MongoClient, IndexModel, ASCENDING
-from startup.config import Config
+from utils.config import Config
 
 pygate_config = Config()
 
