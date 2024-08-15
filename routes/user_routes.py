@@ -47,7 +47,9 @@ def update_user(user_id):
     Update user *platform endpoint.
     Request:
     {
-        "email": "<string>"
+        "email": "<string>",
+        "user_role": "<string>",
+        "user_groups": ["<string>"]
     }
     Response:
     {

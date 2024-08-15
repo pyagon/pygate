@@ -23,14 +23,14 @@ class UserService:
             raise ValueError(f"User {user_data['username']} already exists")
         if UserService.find_user({'email': user_data['email']}):
             raise ValueError(f"Email {user_data['email']} connected to an existing user")
-        hashed_password = password_util.hash_password(user_data['password'])
-        if not password_util.verify_password(user_data['password'], hashed_password):
-            raise ValueError("Unable to hash password")
         if not RoleService.role_exists({'user_role': user_data['user_role']}):
             raise ValueError(f"Role {user_data['user_role']} does not exist")
         for group in user_data['user_groups']:
             if not GroupService.group_exists({'group_name': group}):
                 raise ValueError(f"Group {group} does not exist")
+        hashed_password = password_util.hash_password(user_data['password'])
+        if not password_util.verify_password(user_data['password'], hashed_password):
+            raise ValueError("Unable to hash password")
         user_data['password'] = hashed_password
         UserService.user_collection.insert_one(user_data)
         user_data['password'] = None

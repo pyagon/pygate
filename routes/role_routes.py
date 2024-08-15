@@ -20,7 +20,6 @@ def create_role():
     {
         "role_name": "<string>",
         "role_description": "<string>",
-        "is_admin": "<boolean>",
         "manage_users": "<boolean>",
         "manage_apis": "<boolean>",
         "manage_endpoints": "<boolean>",
