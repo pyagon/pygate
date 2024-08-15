@@ -1,6 +1,10 @@
-#  The contents of this file are property of pygate.org
-#  Review the Apache License 2.0 for valid uses
-#  See https://github.com/pygate-dev/pygate for more information
+"""
+The contents of this file are property of pygate.org
+Review the Apache License 2.0 for valid authorization of use
+See https://github.com/pygate-dev/pygate for more information
+"""
+
+# Start of file
 
 class Config:
 

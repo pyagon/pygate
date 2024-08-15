@@ -13,6 +13,7 @@ from routes.role_routes import role_bp
 from routes.user_routes import user_bp
 from routes.api_routes import api_bp
 from routes.endpoint_routes import endpoint_bp
+from routes.gateway_routes import gateway_bp
 
 pygate = Flask(__name__)
 pygate.register_blueprint(user_bp, url_prefix='/user')
@@ -20,6 +21,7 @@ pygate.register_blueprint(api_bp, url_prefix='/api')
 pygate.register_blueprint(endpoint_bp, url_prefix='/endpoint')
 pygate.register_blueprint(group_bp, url_prefix='/group')
 pygate.register_blueprint(role_bp, url_prefix='/role')
+pygate.register_blueprint(gateway_bp)
 
 if __name__ == '__main__':
     try:
