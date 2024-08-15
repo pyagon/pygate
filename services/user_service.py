@@ -3,7 +3,8 @@ The contents of this file are property of pygate.org
 Review the Apache License 2.0 for valid authorization of use
 See https://github.com/pygate-dev/pygate for more information
 """
-
+from services.group_service import GroupService
+from services.role_service import RoleService
 # Start of file
 
 from utils import password_util
@@ -18,13 +19,18 @@ class UserService:
 
     @staticmethod
     def create_user(user_data):
-        if UserService.find_user({'user_id': user_data['user_id']}):
-            raise ValueError("User already exists")
+        if UserService.find_user({'username': user_data['username']}):
+            raise ValueError(f"User {user_data['username']} already exists")
         if UserService.find_user({'email': user_data['email']}):
-            raise ValueError("Email connected to an existing user")
+            raise ValueError(f"Email {user_data['email']} connected to an existing user")
         hashed_password = password_util.hash_password(user_data['password'])
         if not password_util.verify_password(user_data['password'], hashed_password):
             raise ValueError("Unable to hash password")
+        if not RoleService.role_exists({'user_role': user_data['user_role']}):
+            raise ValueError(f"Role {user_data['user_role']} does not exist")
+        for group in user_data['user_groups']:
+            if not GroupService.group_exists({'group_name': group}):
+                raise ValueError(f"Group {group} does not exist")
         user_data['password'] = hashed_password
         UserService.user_collection.insert_one(user_data)
         user_data['password'] = None

@@ -20,7 +20,7 @@ class Database:
         self.create_indexes()
 
     def initialize_collections(self):
-        collections = ['users', 'apis', 'endpoints', 'rate_limits', 'throttle_limits']
+        collections = ['users', 'apis', 'endpoints', 'groups', 'roles']
         for collection in collections:
             if collection not in self.db.list_collection_names():
                 self.db.create_collection(collection)
@@ -39,8 +39,16 @@ class Database:
         ])
 
         self.db.users.create_indexes([
-            IndexModel([("user_id", ASCENDING)], unique=True),
+            IndexModel([("username", ASCENDING)], unique=True),
             IndexModel([("email", ASCENDING)], unique=True)
+        ])
+
+        self.db.groups.create_indexes([
+            IndexModel([("group_name", ASCENDING)], unique=True)
+        ])
+
+        self.db.roles.create_indexes([
+            IndexModel([("user_role", ASCENDING)], unique=True)
         ])
 
 

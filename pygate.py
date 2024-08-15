@@ -7,14 +7,19 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from flask import Flask
-from routes.users_routes import user_bp
+
+from routes.group_routes import group_bp
+from routes.role_routes import role_bp
+from routes.user_routes import user_bp
 from routes.api_routes import api_bp
 from routes.endpoint_routes import endpoint_bp
 
 pygate = Flask(__name__)
-pygate.register_blueprint(user_bp, url_prefix='/users')
+pygate.register_blueprint(user_bp, url_prefix='/user')
 pygate.register_blueprint(api_bp, url_prefix='/api')
 pygate.register_blueprint(endpoint_bp, url_prefix='/endpoint')
+pygate.register_blueprint(group_bp, url_prefix='/group')
+pygate.register_blueprint(role_bp, url_prefix='/role')
 
 if __name__ == '__main__':
     try:

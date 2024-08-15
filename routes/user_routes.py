@@ -7,7 +7,7 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from flask import Blueprint, request, jsonify
-from services.users_service import UserService
+from services.user_service import UserService
 
 user_bp = Blueprint('users', __name__)
 
@@ -18,9 +18,11 @@ def create_user():
     Create user *platform endpoint.
     Request:
     {
-        "user_id": "<string>",
+        "username": "<string>",
         "email": "<string>",
         "password": "<string>"
+        "user_role": "<string>"
+        "user_groups": ["<string>"]
     }
     Response:
     {
