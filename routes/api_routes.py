@@ -14,6 +14,19 @@ api_bp = Blueprint('api', __name__)
 
 @api_bp.route('', methods=['POST'])
 def create_api():
+    """
+    Create API *platform endpoint.
+    Request:
+    {
+        "api_name": "<string>",
+        "api_version": "<string>",
+        "api_description": "<string>"
+    }
+    Response:
+    {
+        "message": "API created successfully"
+    }
+    """
     try:
         api_data = request.get_json()
         ApiService.create_api(api_data)

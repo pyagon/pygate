@@ -16,6 +16,20 @@ endpoint_bp.route('', methods=['POST'])
 
 @endpoint_bp.route('', methods=['POST'])
 def create_endpoint(api_id):
+    """
+    Create endpoint *platform endpoint.
+    Request:
+    {
+        "api_name": "<string>",
+        "api_version": "<string>",
+        "endpoint_method": "<string>",
+        "endpoint_uri": "<string>"
+    }
+    Response:
+    {
+        "message": "Endpoint created successfully"
+    }
+    """
     try:
         endpoint_data = request.get_json()
         EndpointService.create_endpoint(endpoint_data)
