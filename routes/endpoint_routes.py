@@ -11,8 +11,6 @@ from services.endpoint_service import EndpointService
 
 endpoint_bp = Blueprint('endpoint', __name__)
 
-endpoint_bp.route('', methods=['POST'])
-
 
 @endpoint_bp.route('', methods=['POST'])
 def create_endpoint(api_id):

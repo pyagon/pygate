@@ -9,7 +9,7 @@ See https://github.com/pygate-dev/pygate for more information
 from flask import Blueprint, request, jsonify
 from services.group_service import GroupService
 
-group_bp = Blueprint('role', __name__)
+group_bp = Blueprint('group', __name__)
 
 
 @group_bp.route('', methods=['POST'])
