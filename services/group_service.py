@@ -28,4 +28,11 @@ class GroupService:
     def get_groups():
         return GroupService.group_collection.find_all()
 
+    @staticmethod
+    def get_group(group_name):
+        group = GroupService.group_collection.find_one({'group_name': group_name})
+        if not group:
+            raise ValueError("Group not found")
+        return group
+
 # End of file

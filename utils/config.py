@@ -4,6 +4,7 @@ Review the Apache License 2.0 for valid authorization of use
 See https://github.com/pygate-dev/pygate for more information
 """
 
+
 # Start of file
 
 class Config:

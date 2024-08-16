@@ -1,0 +1,54 @@
+"""
+The contents of this file are property of pygate.org
+Review the Apache License 2.0 for valid authorization of use
+See https://github.com/pygate-dev/pygate for more information
+"""
+from services.api_service import ApiService
+# Start of file
+
+from utils.database import db
+
+
+class SubscriptionService:
+    subscriptions_collection = db.subscriptions
+
+    @staticmethod
+    def api_exists(api_name, api_version):
+        return ApiService.api_collection.find_one({'api_name': api_name, 'api_version': api_version})
+
+    @staticmethod
+    def get_user_subscriptions(data):
+        username = data.get('username')
+        subscriptions = SubscriptionService.subscriptions_collection.find({'username': username})
+        if not subscriptions:
+            raise Exception('No subscriptions found for user')
+        return subscriptions
+
+    @staticmethod
+    def subscribe(data):
+        username = data.get('username')
+        api_name = data.get('api_name')
+        api_version = data.get('api_version')
+        if not SubscriptionService.api_exists(api_name, api_version):
+            raise ValueError("API does not exist")
+        if SubscriptionService.subscriptions_collection.find_one({'username': username})['apis'].contains(f"""{api_name}/{api_version}"""):
+            raise ValueError("User is already subscribed to the API")
+        SubscriptionService.subscriptions_collection.update_one(
+            {'username': username},
+            {'$push': {'apis': f"""{api_name}/{api_version}"""}})
+
+    @staticmethod
+    def unsubscribe(data):
+        username = data.get('username')
+        api_name = data.get('api_name')
+        api_version = data.get('api_version')
+        if not SubscriptionService.api_exists(api_name, api_version):
+            raise ValueError("API does not exist")
+        if not SubscriptionService.subscriptions_collection.find_one({'username': username})['apis'].contains(
+                f"""{api_name}/{api_version}"""):
+            raise ValueError("User is already not subscribed to the API")
+        SubscriptionService.subscriptions_collection.update_one(
+            {'username': username},
+            {'$pull': {'apis': f"""{api_name}/{api_version}"""}})
+
+# End of file

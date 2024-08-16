@@ -69,4 +69,10 @@ class UserService:
         hashed_password = password_util.hash_password(new_password)
         UserService.user_collection.update_one({'_id': user_id}, {'$set': {'password': hashed_password}})
 
+    @staticmethod
+    def check_password(username, password):
+        user = UserService.find_user({'username': username})
+        if not password_util.verify_password(password, user['password']):
+            raise ValueError("Incorrect username and password combination")
+
 # End of file

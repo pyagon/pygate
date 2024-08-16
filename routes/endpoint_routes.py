@@ -7,12 +7,15 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required
+
 from services.endpoint_service import EndpointService
 
 endpoint_bp = Blueprint('endpoint', __name__)
 
 
 @endpoint_bp.route('', methods=['POST'])
+@jwt_required()
 def create_endpoint():
     """
     Create endpoint *platform endpoint.
@@ -37,6 +40,7 @@ def create_endpoint():
 
 
 @endpoint_bp.route('api/<api_name>/<api_version>', methods=['GET'])
+@jwt_required()
 def get_endpoints_by_name_version(api_id):
     """
     Get endpoints *platform endpoint.

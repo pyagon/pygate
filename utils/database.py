@@ -51,6 +51,10 @@ class Database:
             IndexModel([("user_role", ASCENDING)], unique=True)
         ])
 
+        self.db.subscriptions.create_indexes([
+            IndexModel([("username", ASCENDING)], unique=True)
+        ])
+
 
 database = Database()
 

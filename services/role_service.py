@@ -28,4 +28,11 @@ class RoleService:
     def get_roles():
         return RoleService.role_collection.find_all()
 
+    @staticmethod
+    def get_role(role_name):
+        role = RoleService.role_collection.find_one({'group_name': role_name})
+        if not role:
+            raise ValueError("Role not found")
+        return role
+
 # End of file

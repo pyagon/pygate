@@ -7,12 +7,14 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from flask import Blueprint, request
+from flask_jwt_extended import jwt_required
 
 gateway_bp = Blueprint('gateway', __name__)
 
 
 @gateway_bp.route('/', defaults={'path': ''})
 @gateway_bp.route('/<path:path>')
+@jwt_required()
 def catch_all(path):
     # This is the API Gateway.. TODO: Build the gateway.
     return f"Requested path: {path}"
