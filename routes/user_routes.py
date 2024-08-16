@@ -7,15 +7,17 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from services.user_service import UserService
+from utils.role_util import role_required
 
 user_bp = Blueprint('users', __name__)
 
 
 @user_bp.route('', methods=['POST'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def create_user():
     """
     Create user *platform endpoint.
@@ -50,6 +52,7 @@ def create_user():
 
 @user_bp.route('/<user_id>', methods=['PUT'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def update_user(user_id):
     """
     Update user *platform endpoint.
@@ -78,6 +81,7 @@ def update_user(user_id):
 
 @user_bp.route('/<user_id>/update-password', methods=['PUT'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def update_user_password(user_id):
     """
     Update user *platform endpoint.
@@ -107,6 +111,7 @@ def update_user_password(user_id):
 
 @user_bp.route('<username>', methods=['GET'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def get_user_by_username(username):
     """
     Create user *platform endpoint.
@@ -131,6 +136,7 @@ def get_user_by_username(username):
 
 @user_bp.route('<email>', methods=['GET'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def get_user_by_email(email):
     """
     Create user *platform endpoint.

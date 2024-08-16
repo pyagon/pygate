@@ -75,4 +75,11 @@ class UserService:
         if not password_util.verify_password(password, user['password']):
             raise ValueError("Incorrect username and password combination")
 
+    @staticmethod
+    def check_password_return_user(username, password):
+        user = UserService.find_user({'username': username})
+        if not password_util.verify_password(password, user['password']):
+            raise ValueError("Incorrect username and password combination")
+        return user
+
 # End of file

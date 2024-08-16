@@ -7,15 +7,17 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from services.group_service import GroupService
+from utils.role_util import role_required
 
 group_bp = Blueprint('group', __name__)
 
 
 @group_bp.route('', methods=['POST'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def create_group():
     """
     Create group *platform endpoint.
@@ -40,6 +42,7 @@ def create_group():
 
 @group_bp.route('', methods=['GET'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def get_groups():
     """
     Get groups *platform endpoint.
@@ -66,6 +69,7 @@ def get_groups():
 
 @group_bp.route('<group_name>', methods=['GET'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def get_group(group_name):
     """
     Get group *platform endpoint.

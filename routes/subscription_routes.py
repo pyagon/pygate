@@ -7,15 +7,17 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token, jwt_required
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from services.subscription_service import SubscriptionService
+from utils.role_util import role_required
 
 subscription_bp = Blueprint('subscription', __name__)
 
 
 @subscription_bp.route('/subscribe', methods=['POST'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def subscribe_api():
     """
     Subscribe to API *platform endpoint.
@@ -40,6 +42,7 @@ def subscribe_api():
 
 @subscription_bp.route('/unsubscribe', methods=['POST'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def unsubscribe_api():
     """
     Unsubscribe from API *platform endpoint.

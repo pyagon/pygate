@@ -7,15 +7,17 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from services.role_service import RoleService
+from utils.role_util import role_required
 
 role_bp = Blueprint('role', __name__)
 
 
 @role_bp.route('', methods=['POST'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def create_role():
     """
     Create API *platform endpoint.
@@ -44,6 +46,7 @@ def create_role():
 
 @role_bp.route('', methods=['GET'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def get_roles():
     """
     Create API *platform endpoint.
@@ -74,6 +77,7 @@ def get_roles():
 
 @role_bp.route('<role_name>', methods=['GET'])
 @jwt_required()
+@role_required(("admin", "dev", "platform"))
 def get_role(role_name):
     """
     Create API *platform endpoint.
