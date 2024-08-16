@@ -24,4 +24,26 @@ class EndpointService:
         else:
             raise ValueError("API does not exist")
 
+    @staticmethod
+    def get_endpoints_by_id(api_id):
+        api = EndpointService.api_collection.find_one({'api_id': api_id})
+        if api:
+            endpoints = EndpointService.endpoint_collection.find({'api_id': api_id})
+            if endpoints:
+                endpoints = [{'endpoint_method': endpoint['endpoint_method'], 'endpoint_uri': endpoint['endpoint_uri']} for endpoint in endpoints]
+            return {'api_name': api['name'], 'api_version': api['version'], 'endpoints': endpoints}
+        else:
+            raise ValueError("API does not exist")
+
+    @staticmethod
+    def get_endpoints_by_name_version(api_name, api_version):
+        api = EndpointService.api_collection.find_one({'api_name': api_name, 'api_version': api_version})
+        if api:
+            endpoints = EndpointService.endpoint_collection.find({'api_id': api['api_id']})
+            if endpoints:
+                endpoints = [{'endpoint_method': endpoint['endpoint_method'], 'endpoint_uri': endpoint['endpoint_uri']} for endpoint in endpoints]
+            return {'api_name': api['name'], 'api_version': api['version'], 'endpoints': endpoints}
+        else:
+            raise ValueError("API does not exist")
+
 # End of file

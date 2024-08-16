@@ -3,9 +3,11 @@ The contents of this file are property of pygate.org
 Review the Apache License 2.0 for valid authorization of use
 See https://github.com/pygate-dev/pygate for more information
 """
+
+# Start of file
+
 from services.group_service import GroupService
 from services.role_service import RoleService
-# Start of file
 
 from utils import password_util
 from utils.database import db
