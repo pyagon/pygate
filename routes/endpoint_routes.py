@@ -36,33 +36,7 @@ def create_endpoint():
         return jsonify({"error": str(e)}), 400
 
 
-@endpoint_bp.route('<api_id>', methods=['GET'])
-def get_endpoints_by_id(api_id):
-    """
-    Get endpoints *platform endpoint.
-    Request:
-    {
-    }
-    Response:
-    {
-        "api_name": "<string>",
-        "api_version": "<string>",
-        "endpoints": [
-            {
-                "endpoint_method": "<string>",
-                "endpoint_uri": "<string>"
-            }
-        ]
-    }
-    """
-    try:
-        endpoints = EndpointService.get_endpoints_by_id(api_id)
-        return jsonify({endpoints}), 200
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
-
-
-@endpoint_bp.route('<api_name>/<api_version>', methods=['GET'])
+@endpoint_bp.route('api/<api_name>/<api_version>', methods=['GET'])
 def get_endpoints_by_name_version(api_id):
     """
     Get endpoints *platform endpoint.

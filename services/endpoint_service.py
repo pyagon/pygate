@@ -17,21 +17,12 @@ class EndpointService:
     def create_endpoint(data):
         api = EndpointService.api_collection.find_one({'name': data['api_name'], 'version': data['api_version']})
         if api:
-            if EndpointService.endpoint_collection.find_one({'endpoint_method': data['endpoint_method'], 'endpoint_uri': data['endpoint_uri'], 'api_id': api['api_id']}):
+            if EndpointService.endpoint_collection.find_one(
+                    {'endpoint_method': data['endpoint_method'], 'endpoint_uri': data['endpoint_uri'],
+                     'api_id': api['api_id']}):
                 raise ValueError("Endpoint already exists for the requested API version")
             else:
                 EndpointService.endpoint_collection.insert_one(data)
-        else:
-            raise ValueError("API does not exist")
-
-    @staticmethod
-    def get_endpoints_by_id(api_id):
-        api = EndpointService.api_collection.find_one({'api_id': api_id})
-        if api:
-            endpoints = EndpointService.endpoint_collection.find({'api_id': api_id})
-            if endpoints:
-                endpoints = [{'endpoint_method': endpoint['endpoint_method'], 'endpoint_uri': endpoint['endpoint_uri']} for endpoint in endpoints]
-            return {'api_name': api['name'], 'api_version': api['version'], 'endpoints': endpoints}
         else:
             raise ValueError("API does not exist")
 
@@ -41,7 +32,8 @@ class EndpointService:
         if api:
             endpoints = EndpointService.endpoint_collection.find({'api_id': api['api_id']})
             if endpoints:
-                endpoints = [{'endpoint_method': endpoint['endpoint_method'], 'endpoint_uri': endpoint['endpoint_uri']} for endpoint in endpoints]
+                endpoints = [{'endpoint_method': endpoint['endpoint_method'], 'endpoint_uri': endpoint['endpoint_uri']}
+                             for endpoint in endpoints]
             return {'api_name': api['name'], 'api_version': api['version'], 'endpoints': endpoints}
         else:
             raise ValueError("API does not exist")

@@ -120,7 +120,7 @@ def get_user_by_username(username):
 
 
 @user_bp.route('<email>', methods=['GET'])
-def get_user_by_username(email):
+def get_user_by_email(email):
     """
     Create user *platform endpoint.
     Request:
