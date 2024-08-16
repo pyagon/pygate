@@ -95,4 +95,50 @@ def update_user_password(user_id):
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
+
+@user_bp.route('<username>', methods=['GET'])
+def get_user_by_username(username):
+    """
+    Create user *platform endpoint.
+    Request:
+    {
+    }
+    Response:
+    {
+        "username": "<string>",
+        "email": "<string>",
+        "password": "<string>"
+        "user_role": "<string>"
+        "user_groups": ["<string>"]
+    }
+    """
+    try:
+        user = UserService.get_user_by_username(username)
+        return jsonify({user}), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
+
+@user_bp.route('<email>', methods=['GET'])
+def get_user_by_username(email):
+    """
+    Create user *platform endpoint.
+    Request:
+    {
+    }
+    Response:
+    {
+        "username": "<string>",
+        "email": "<string>",
+        "password": "<string>"
+        "user_role": "<string>"
+        "user_groups": ["<string>"]
+    }
+    """
+    try:
+        user = UserService.get_user_by_email(email)
+        return jsonify({user}), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
 # End of file

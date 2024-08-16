@@ -20,6 +20,20 @@ class UserService:
         return UserService.user_collection.find_one({'_id': user_data['user_id']})
 
     @staticmethod
+    def get_user_by_username(username):
+        user = UserService.user_collection.find_one({'username': username})
+        if not user:
+            raise ValueError("User not found")
+        return user
+
+    @staticmethod
+    def get_user_by_email(email):
+        user = UserService.user_collection.find_one({'email': email})
+        if not user:
+            raise ValueError("User not found")
+        return user
+
+    @staticmethod
     def create_user(user_data):
         if UserService.find_user({'username': user_data['username']}):
             raise ValueError(f"User {user_data['username']} already exists")
