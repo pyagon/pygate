@@ -38,4 +38,33 @@ def create_role():
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
+
+@role_bp.route('', methods=['GET'])
+def get_roles():
+    """
+    Create API *platform endpoint.
+    Request:
+    {
+    }
+    Response:
+    {
+        "roles": [
+            {
+                "role_name": "<string>",
+                "role_description": "<string>",
+                "manage_users": "<boolean>",
+                "manage_apis": "<boolean>",
+                "manage_endpoints": "<boolean>",
+                "manage_groups": "<boolean>",
+                "manage_roles": "<boolean>"
+            }
+        ]
+    }
+    """
+    try:
+        roles = RoleService.get_roles()
+        return jsonify({roles}), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
 # End of file

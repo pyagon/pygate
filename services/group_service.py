@@ -24,4 +24,8 @@ class GroupService:
             return True
         return False
 
+    @staticmethod
+    def get_groups():
+        return GroupService.group_collection.find_all()
+
 # End of file

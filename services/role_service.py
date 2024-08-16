@@ -24,4 +24,8 @@ class RoleService:
             return True
         return False
 
+    @staticmethod
+    def get_roles():
+        return RoleService.role_collection.find_all()
+
 # End of file
