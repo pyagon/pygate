@@ -9,13 +9,16 @@ See https://github.com/pygate-dev/pygate for more information
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required
 
+from utils.subscription_util import subscription_required
+
 gateway_bp = Blueprint('gateway', __name__)
 
 
-@gateway_bp.route('/', defaults={'path': ''})
-@gateway_bp.route('/<path:path>')
+@gateway_bp.route('/', defaults={'path': ''}, methods=['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'])
+@gateway_bp.route('/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'])
 @jwt_required()
-def catch_all(path):
+@subscription_required()
+def gateway(path):
     # This is the API Gateway.. TODO: Build the gateway.
     return f"Requested path: {path}"
 

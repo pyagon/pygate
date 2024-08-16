@@ -8,9 +8,7 @@ See https://github.com/pygate-dev/pygate for more information
 
 from functools import wraps
 from flask import jsonify
-from flask_jwt_extended import get_jwt_identity, get_jwt
-
-from services.user_service import UserService
+from flask_jwt_extended import get_jwt
 
 
 def role_required(allowed_roles):
@@ -18,14 +16,8 @@ def role_required(allowed_roles):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             user_role = get_jwt().get('role', None)
-            username = get_jwt_identity()
-            user = UserService.user_collection.find_one({"username": username})
-
             if user_role not in allowed_roles:
                 return jsonify({"message": "You do not have permission to access this resource"}), 403
-
             return f(*args, **kwargs)
-
         return decorated_function
-
     return decorator
