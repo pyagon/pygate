@@ -14,13 +14,13 @@ class RoleService:
 
     @staticmethod
     def create_role(data):
-        if RoleService.role_collection.find_one({'user_role': data['user_role']}):
+        if RoleService.role_collection.find_one({'role_name': data.get('role')}):
             raise ValueError("Role already exists")
         RoleService.role_collection.insert_one(data)
 
     @staticmethod
     def role_exists(data):
-        if RoleService.role_collection.find_one({'user_role': data['user_role']}):
+        if RoleService.role_collection.find_one({'role_name': data.get('role')}):
             return True
         return False
 

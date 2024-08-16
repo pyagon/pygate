@@ -24,7 +24,7 @@ def role_required(allowed_roles):
             if user_role not in allowed_roles:
                 return jsonify({"message": "You do not have permission to access this resource"}), 403
 
-            return f(user, *args, **kwargs)
+            return f(*args, **kwargs)
 
         return decorated_function
 

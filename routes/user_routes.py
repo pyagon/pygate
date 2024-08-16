@@ -26,8 +26,8 @@ def create_user():
         "username": "<string>",
         "email": "<string>",
         "password": "<string>"
-        "user_role": "<string>"
-        "user_groups": ["<string>"],
+        "role": "<string>"
+        "groups": ["<string>"],
         "rate_limit": "<int>",
         "rate_limit_duration": "<int>",
         "throttle": "<int>",
@@ -59,8 +59,8 @@ def update_user(user_id):
     Request:
     {
         "email": "<string>",
-        "user_role": "<string>",
-        "user_groups": ["<string>"]
+        "role": "<string>",
+        "groups": ["<string>"]
     }
     Response:
     {
@@ -114,7 +114,7 @@ def update_user_password(user_id):
 @role_required(("admin", "dev", "platform"))
 def get_user_by_username(username):
     """
-    Create user *platform endpoint.
+    Get user by username *platform endpoint.
     Request:
     {
     }
@@ -123,13 +123,13 @@ def get_user_by_username(username):
         "username": "<string>",
         "email": "<string>",
         "password": "<string>"
-        "user_role": "<string>"
-        "user_groups": ["<string>"]
+        "role": "<string>"
+        "groups": ["<string>"]
     }
     """
     try:
         user = UserService.get_user_by_username(username)
-        return jsonify({user}), 200
+        return jsonify(user), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
@@ -139,7 +139,7 @@ def get_user_by_username(username):
 @role_required(("admin", "dev", "platform"))
 def get_user_by_email(email):
     """
-    Create user *platform endpoint.
+    Get user by email *platform endpoint.
     Request:
     {
     }
@@ -148,13 +148,13 @@ def get_user_by_email(email):
         "username": "<string>",
         "email": "<string>",
         "password": "<string>"
-        "user_role": "<string>"
-        "user_groups": ["<string>"]
+        "role": "<string>"
+        "groups": ["<string>"]
     }
     """
     try:
         user = UserService.get_user_by_email(email)
-        return jsonify({user}), 200
+        return jsonify(user), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 

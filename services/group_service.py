@@ -14,13 +14,13 @@ class GroupService:
 
     @staticmethod
     def create_group(data):
-        if GroupService.group_collection.find_one({'group_name': data['group_name']}):
+        if GroupService.group_collection.find_one({'group_name': data.get('group_name')}):
             raise ValueError("Group already exists")
         GroupService.group_collection.insert_one(data)
 
     @staticmethod
     def group_exists(data):
-        if GroupService.group_collection.find_one({'group_name': data['group_name']}):
+        if GroupService.group_collection.find_one({'group_name': data.get('group_name')}):
             return True
         return False
 

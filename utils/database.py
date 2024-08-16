@@ -7,6 +7,8 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from pymongo import MongoClient, IndexModel, ASCENDING
+
+from utils import password_util
 from utils.config import Config
 
 pygate_config = Config()
@@ -54,6 +56,15 @@ class Database:
         self.db.subscriptions.create_indexes([
             IndexModel([("username", ASCENDING)], unique=True)
         ])
+
+        if not self.db.users.find_one({"username": "admin"}):
+            self.db.users.insert_one({
+                "username": "admin",
+                "email": "admin@pygate.org",
+                "password": password_util.hash_password("password123"),
+                "role": "admin",
+                "groups": ["ALL"]
+            })
 
 
 database = Database()

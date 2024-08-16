@@ -23,7 +23,7 @@ def authorization():
         if not username or not password:
             return jsonify({"msg": "Missing username or password"}), 400
         user = UserService.check_password_return_user(username, password)
-        access_token = create_access_token(identity=user.get('username'), additional_claims={'role': user.get('user_role')})
+        access_token = create_access_token(identity=user.get('username'), additional_claims={'role': user.get('role')})
         return jsonify(access_token=access_token), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400

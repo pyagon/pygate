@@ -10,6 +10,7 @@ from random import random
 from flask import Flask
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
+from routes.authorization_routes import authorization_bp
 from routes.group_routes import group_bp
 from routes.role_routes import role_bp
 from routes.subscription_routes import subscription_bp
@@ -22,9 +23,10 @@ import secrets
 
 pygate = Flask(__name__)
 
-pygate.config['JWT_SECRET_KEY'] = secrets.token_hex(32)
+pygate.config['JWT_SECRET_KEY'] = "12345" # secrets.token_hex(32)
 jwt = JWTManager(pygate)
 pygate.register_blueprint(gateway_bp, url_prefix='/api')
+pygate.register_blueprint(authorization_bp, url_prefix='/platform')
 pygate.register_blueprint(user_bp, url_prefix='/platform/user')
 pygate.register_blueprint(api_bp, url_prefix='/platform/api')
 pygate.register_blueprint(endpoint_bp, url_prefix='/platform/endpoint')

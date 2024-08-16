@@ -14,7 +14,7 @@ class ApiService:
 
     @staticmethod
     def create_api(data):
-        if ApiService.api_collection.find_one({'api_name': data['api_name'], 'api_version': data['api_version']}):
+        if ApiService.api_collection.find_one({'api_name': data.get('api_name'), 'api_version': data.get('api_version')}):
             raise ValueError("API already exists for the requested name and version")
         ApiService.api_collection.insert_one(data)
 
