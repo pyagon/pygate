@@ -8,7 +8,10 @@ from random import random
 # Start of file
 
 from flask import Flask
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import JWTManager
+from flask_cors import CORS
+from gevent.pywsgi import WSGIServer
+from flask_caching import Cache
 
 from routes.authorization_routes import authorization_bp
 from routes.group_routes import group_bp
@@ -19,9 +22,13 @@ from routes.api_routes import api_bp
 from routes.endpoint_routes import endpoint_bp
 from routes.gateway_routes import gateway_bp
 
-import secrets
+# import secrets
+import logging
 
 pygate = Flask(__name__)
+#cache = Cache(pygate, config={'CACHE_TYPE': 'redis'})
+CORS(pygate)
+logging.basicConfig(level=logging.INFO)
 
 pygate.config['JWT_SECRET_KEY'] = "12345" # secrets.token_hex(32)
 jwt = JWTManager(pygate)
@@ -34,11 +41,8 @@ pygate.register_blueprint(group_bp, url_prefix='/platform/group')
 pygate.register_blueprint(role_bp, url_prefix='/platform/role')
 pygate.register_blueprint(subscription_bp, url_prefix='/platform/subscription')
 
-if __name__ == '__main__':
-    try:
-        pygate.run()
-    except Exception as e:
-        print(f"An unexpected error occurred: {str(e)}")
-        print(f"Error type: {type(e).__name__}")
+http_server = WSGIServer(('', 5000), pygate)
+logging.info("Pygate HTTP server started on port 5000")
+http_server.serve_forever()
 
 # End of file

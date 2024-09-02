@@ -62,7 +62,7 @@ def get_groups():
     """
     try:
         groups = GroupService.get_groups()
-        return jsonify({groups}), 200
+        return jsonify(groups), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 

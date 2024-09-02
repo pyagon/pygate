@@ -7,7 +7,7 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 
 from services.api_service import ApiService
 from utils.role_util import role_required

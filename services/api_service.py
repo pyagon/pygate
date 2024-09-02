@@ -22,8 +22,8 @@ class ApiService:
     def get_api_by_name_version(api_name, api_version):
         api = ApiService.api_collection.find_one({'api_name': api_name, 'api_version': api_version})
         if not api:
-            raise ValueError("API already exists for the requested name and version")
-        api['path'] = f"/{api['api_name']}/{api['api_version']}"
+            raise ValueError("API does not exists for the requested name and version")
+        api['path'] = f"/{api.get('api_name')}/{api.get('api_version')}"
         return api
 
 

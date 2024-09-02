@@ -16,7 +16,7 @@ pygate_config = Config()
 
 class Database:
     def __init__(self):
-        self.client = MongoClient(pygate_config.get_mongodb_uri(), serverSelectionTimeoutMS=5000)
+        self.client = MongoClient(pygate_config.get_mongodb_uri(), serverSelectionTimeoutMS=5000, maxPoolSize=50)
         self.db = self.client.get_database()
         self.initialize_collections()
         self.create_indexes()
@@ -57,6 +57,7 @@ class Database:
             IndexModel([("username", ASCENDING)], unique=True)
         ])
 
+        # TODO: Remove this before merging to master
         if not self.db.users.find_one({"username": "admin"}):
             self.db.users.insert_one({
                 "username": "admin",

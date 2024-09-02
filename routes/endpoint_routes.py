@@ -41,7 +41,7 @@ def create_endpoint():
         return jsonify({"error": str(e)}), 400
 
 
-@endpoint_bp.route('api/<api_name>/<api_version>', methods=['GET'])
+@endpoint_bp.route('/api/<api_name>/<api_version>', methods=['GET'])
 @jwt_required()
 @role_required(("admin", "dev", "platform"))
 def get_endpoints_by_name_version(api_id):

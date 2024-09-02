@@ -25,3 +25,5 @@ def subscription_required():
             return f(*args, **kwargs)
         return decorated_function
     return decorator
+
+# End of file
