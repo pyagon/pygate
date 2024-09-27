@@ -1,3 +1,11 @@
+"""
+The contents of this file are property of pygate.org
+Review the Apache License 2.0 for valid authorization of use
+See https://github.com/pygate-dev/pygate for more information
+"""
+
+# Start of file
+
 import os
 import signal
 import platform
@@ -28,3 +36,5 @@ def stop_script(script_name):
 if __name__ == '__main__':
     script_to_stop = 'pygate.py'
     stop_script(script_to_stop)
+
+# End of file

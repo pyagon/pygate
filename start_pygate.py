@@ -1,3 +1,11 @@
+"""
+The contents of this file are property of pygate.org
+Review the Apache License 2.0 for valid authorization of use
+See https://github.com/pygate-dev/pygate for more information
+"""
+
+# Start of file
+
 import os
 import subprocess
 import platform
@@ -18,3 +26,5 @@ def start_script_in_background(script_name):
 if __name__ == '__main__':
     script_to_run = 'pygate.py'
     start_script_in_background(script_to_run)
+
+# End of file

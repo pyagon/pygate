@@ -7,16 +7,14 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from pymongo import MongoClient, IndexModel, ASCENDING
-
 from utils import password_util
-from utils.config import Config
 
-pygate_config = Config()
+import os
 
 
 class Database:
     def __init__(self):
-        self.client = MongoClient(pygate_config.get_mongodb_uri(), serverSelectionTimeoutMS=5000, maxPoolSize=50)
+        self.client = MongoClient(os.getenv("MONGO_DB_URI"), serverSelectionTimeoutMS=5000, maxPoolSize=50)
         self.db = self.client.get_database()
         self.initialize_collections()
         self.create_indexes()
