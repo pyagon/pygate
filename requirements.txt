@@ -1,3 +1,17 @@
+"""
+The contents of this file are property of pygate.org
+Review the Apache License 2.0 for valid authorization of use
+See https://github.com/pygate-dev/pygate for more information
+"""
+
+"""
+These requirements are external to the pygate project.
+Please review the license information for each package.
+Use these packages at your own risk.
+"""
+
+# Start of file
+
 Flask==2.2.2
 Flask-JWT-Extended==4.4.4
 Flask-CORS==3.0.10
@@ -7,3 +21,5 @@ pymongo==4.1.1
 bcrypt==3.2.0
 psutil==6.0.0
 python-dotenv==0.19.2
+
+# End of file

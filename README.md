@@ -15,7 +15,7 @@ Ensure you have a MongoDB server running (locally for now)
 Install requirements
 
 ```bash
-  pip install -r requirements
+  pip install -r requirements.txt
 ```
 
 Start pygate
@@ -29,3 +29,16 @@ Stop pygate
 ```bash
   python start_pygate.py
 ```
+
+
+
+## License Information
+
+The contents of this repository are property of pygate.org
+Review the Apache License 2.0 for valid authorization of use
+See https://github.com/pygate-dev/pygate for more information
+
+## Disclaimer
+
+Use this code at your own risk. 
+This code is not yet ready for production environments.
