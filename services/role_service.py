@@ -14,22 +14,34 @@ class RoleService:
 
     @staticmethod
     def create_role(data):
+        """
+        Onboard a role to the platform.
+        """
         if RoleService.role_collection.find_one({'role_name': data.get('role')}):
             raise ValueError("Role already exists")
         RoleService.role_collection.insert_one(data)
 
     @staticmethod
     def role_exists(data):
+        """
+        Check if a role exists.
+        """
         if RoleService.role_collection.find_one({'role_name': data.get('role')}):
             return True
         return False
 
     @staticmethod
     def get_roles():
+        """
+        Get all roles.
+        """
         return RoleService.role_collection.find_all()
 
     @staticmethod
     def get_role(role_name):
+        """
+        Get a role by name.
+        """
         role = RoleService.role_collection.find_one({'group_name': role_name})
         if not role:
             raise ValueError("Role not found")

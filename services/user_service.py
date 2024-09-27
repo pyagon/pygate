@@ -17,14 +17,23 @@ class UserService:
     user_collection = db.users
     @staticmethod
     def find_user(user_data):
+        """
+        Find a user by username.
+        """
         return UserService.user_collection.find_one({'username': user_data.get('username')})
 
     @staticmethod
     def find_user_email(user_data):
+        """
+        Find a user by email.
+        """
         return UserService.user_collection.find_one({'email': user_data.get('email')})
 
     @staticmethod
     def get_user_by_username(username):
+        """
+        Get a user by username.
+        """
         user = UserService.user_collection.find_one({'username': username})
         if not user:
             raise ValueError("User not found")
@@ -34,6 +43,9 @@ class UserService:
 
     @staticmethod
     def get_user_by_email(email):
+        """
+        Get a user by email.
+        """
         user = UserService.user_collection.find_one({'email': email})
         if not user:
             raise ValueError("User not found")
@@ -43,6 +55,9 @@ class UserService:
 
     @staticmethod
     def create_user(user_data):
+        """
+        Create a user.
+        """
         if UserService.find_user({'username': user_data.get('username')}):
             raise ValueError(f"User {user_data.get('username')} already exists")
         if UserService.find_user_email({'email': user_data.get('email')}):
@@ -63,6 +78,9 @@ class UserService:
 
     @staticmethod
     def update_user(username, update_data):
+        """
+        Update a user.
+        """
         existing_user = UserService.find_user({'username': username})
         if not existing_user:
             raise ValueError("User not found")
@@ -70,6 +88,9 @@ class UserService:
 
     @staticmethod
     def update_password(username, current_password, new_password):
+        """
+        Update a user's password.
+        """
         user = UserService.find_user({'username': username})
         if not user:
             raise ValueError("User not found")
@@ -80,6 +101,9 @@ class UserService:
 
     @staticmethod
     def check_password(username, password):
+        """
+        Check a user's password.
+        """
         user = UserService.find_user({'username': username})
         if not user:
             raise ValueError("User not found")
@@ -88,6 +112,9 @@ class UserService:
 
     @staticmethod
     def check_password_return_user(username, password):
+        """
+        Check a user's password and return the user.
+        """
         user = UserService.user_collection.find_one({'username': username})
         if not user:
             raise ValueError("User not found")

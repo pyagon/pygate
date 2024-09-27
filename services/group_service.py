@@ -14,22 +14,34 @@ class GroupService:
 
     @staticmethod
     def create_group(data):
+        """
+        Onboard a group to the platform.
+        """
         if GroupService.group_collection.find_one({'group_name': data.get('group_name')}):
             raise ValueError("Group already exists")
         GroupService.group_collection.insert_one(data)
 
     @staticmethod
     def group_exists(data):
+        """
+        Check if a group exists.
+        """
         if GroupService.group_collection.find_one({'group_name': data.get('group_name')}):
             return True
         return False
 
     @staticmethod
     def get_groups():
+        """
+        Get all groups.
+        """
         return GroupService.group_collection.find_all()
 
     @staticmethod
     def get_group(group_name):
+        """
+        Get a group by name.
+        """
         group = GroupService.group_collection.find_one({'group_name': group_name})
         if not group:
             raise ValueError("Group not found")

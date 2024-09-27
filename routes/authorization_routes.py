@@ -16,6 +16,18 @@ authorization_bp = Blueprint('authorization', __name__)
 
 @authorization_bp.route('/authorization', methods=['POST'])
 def authorization():
+    """
+    Create Authorization *platform endpoint.
+    Request:
+    {
+        "username": "<string>",
+        "password": "<string>"
+    }
+    Response:
+    {
+        "access_token": "<string>"
+    }
+    """
     try:
         data = request.get_json()
         username = data.get('username')

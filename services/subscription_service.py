@@ -14,10 +14,16 @@ class SubscriptionService:
 
     @staticmethod
     def api_exists(api_name, api_version):
+        """
+        Check if an API exists.
+        """
         return ApiService.api_collection.find_one({'api_name': api_name, 'api_version': api_version})
 
     @staticmethod
     def get_user_subscriptions(data):
+        """
+        Get user subscriptions.
+        """
         username = data.get('username')
         subscriptions = SubscriptionService.subscriptions_collection.find({'username': username})
         if not subscriptions:
@@ -26,6 +32,9 @@ class SubscriptionService:
 
     @staticmethod
     def subscribe(data):
+        """
+        Subscribe to an API.
+        """
         username = data.get('username')
         api_name = data.get('api_name')
         api_version = data.get('api_version')
@@ -39,6 +48,9 @@ class SubscriptionService:
 
     @staticmethod
     def unsubscribe(data):
+        """
+        Unsubscribe from an API.
+        """
         username = data.get('username')
         api_name = data.get('api_name')
         api_version = data.get('api_version')
