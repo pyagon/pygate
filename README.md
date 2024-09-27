@@ -34,11 +34,16 @@ Stop pygate
 
 ## License Information
 
-The contents of this repository are property of pygate.org
-Review the Apache License 2.0 for valid authorization of use
-See https://github.com/pygate-dev/pygate for more information
+The contents of this repository are property of pygate.org.
+
+Review the Apache License 2.0 for valid authorization of use.
+
+See https://github.com/pygate-dev/pygate for more information.
+
+
 
 ## Disclaimer
 
 Use this code at your own risk. 
+
 This code is not yet ready for production environments.
