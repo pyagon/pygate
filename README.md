@@ -44,6 +44,8 @@ See https://github.com/pygate-dev/pygate for more information.
 
 ## Disclaimer
 
-Use this code at your own risk. 
+Use this code at your own risk. All liability is disclaimed.
 
 This code is not yet ready for production environments.
+
+By reading this disclaimer, you agree to the terms and conditions set forth in the license and noted annotations in the code.
