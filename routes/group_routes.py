@@ -15,6 +15,8 @@ from utils.role_util import role_required
 group_bp = Blueprint('group', __name__)
 
 
+# Start role based endpoints
+
 @group_bp.route('', methods=['POST'])
 @jwt_required()
 @role_required(("admin", "dev", "platform"))
@@ -91,5 +93,7 @@ def get_group(group_name):
         return jsonify({group}), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+
+# End role based endpoints
 
 # End of file

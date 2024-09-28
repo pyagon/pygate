@@ -15,6 +15,8 @@ from utils.role_util import role_required
 user_bp = Blueprint('users', __name__)
 
 
+# Start role based endpoints
+
 @user_bp.route('', methods=['POST'])
 @jwt_required()
 @role_required(("admin", "dev", "platform"))
@@ -157,5 +159,7 @@ def get_user_by_email(email):
         return jsonify(user), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+    
+# End role based endpoints
 
 # End of file

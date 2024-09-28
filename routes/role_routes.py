@@ -15,6 +15,8 @@ from utils.role_util import role_required
 role_bp = Blueprint('role', __name__)
 
 
+# Start role based endpoints
+
 @role_bp.route('', methods=['POST'])
 @jwt_required()
 @role_required(("admin", "dev", "platform"))
@@ -102,5 +104,7 @@ def get_role(role_name):
         return jsonify({role}), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+
+# End role based endpoints
 
 # End of file

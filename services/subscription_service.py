@@ -3,9 +3,10 @@ The contents of this file are property of pygate.org
 Review the Apache License 2.0 for valid authorization of use
 See https://github.com/pygate-dev/pygate for more information
 """
-from services.api_service import ApiService
+
 # Start of file
 
+from services.api_service import ApiService
 from utils.database import db
 
 
@@ -20,11 +21,10 @@ class SubscriptionService:
         return ApiService.api_collection.find_one({'api_name': api_name, 'api_version': api_version})
 
     @staticmethod
-    def get_user_subscriptions(data):
+    def get_user_subscriptions(username):
         """
         Get user subscriptions.
         """
-        username = data.get('username')
         subscriptions = SubscriptionService.subscriptions_collection.find({'username': username})
         if not subscriptions:
             raise Exception('No subscriptions found for user')
