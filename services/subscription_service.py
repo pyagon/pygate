@@ -8,12 +8,14 @@ See https://github.com/pygate-dev/pygate for more information
 
 from services.api_service import ApiService
 from utils.database import db
+from pygate import cache
 
 
 class SubscriptionService:
     subscriptions_collection = db.subscriptions
 
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def api_exists(api_name, api_version):
         """
         Check if an API exists.
@@ -21,6 +23,7 @@ class SubscriptionService:
         return ApiService.api_collection.find_one({'api_name': api_name, 'api_version': api_version})
 
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def get_user_subscriptions(username):
         """
         Get user subscriptions.

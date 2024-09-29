@@ -11,11 +11,14 @@ from services.role_service import RoleService
 
 from utils import password_util
 from utils.database import db
+from pygate import cache
 
 
 class UserService:
     user_collection = db.users
+
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def find_user(user_data):
         """
         Find a user by username.
@@ -23,6 +26,7 @@ class UserService:
         return UserService.user_collection.find_one({'username': user_data.get('username')})
 
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def find_user_email(user_data):
         """
         Find a user by email.
@@ -30,6 +34,7 @@ class UserService:
         return UserService.user_collection.find_one({'email': user_data.get('email')})
 
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def get_user_by_username(username):
         """
         Get a user by username.
@@ -42,6 +47,7 @@ class UserService:
         return user
 
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def get_user_by_email(email):
         """
         Get a user by email.

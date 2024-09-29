@@ -7,6 +7,7 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from utils.database import db
+from pygate import cache
 
 
 class RoleService:
@@ -22,6 +23,7 @@ class RoleService:
         RoleService.role_collection.insert_one(data)
 
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def role_exists(data):
         """
         Check if a role exists.
@@ -31,6 +33,7 @@ class RoleService:
         return False
 
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def get_roles():
         """
         Get all roles.
@@ -38,6 +41,7 @@ class RoleService:
         return RoleService.role_collection.find_all()
 
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def get_role(role_name):
         """
         Get a role by name.

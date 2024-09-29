@@ -7,6 +7,7 @@ See https://github.com/pygate-dev/pygate for more information
 # Start of file
 
 from utils.database import db
+from pygate import cache
 
 
 class EndpointService:
@@ -30,6 +31,7 @@ class EndpointService:
             raise ValueError("API does not exist")
 
     @staticmethod
+    @cache.cached(timeout=300, query_string=True)
     def get_endpoints_by_name_version(api_name, api_version):
         """
         Get endpoints by API name and version.

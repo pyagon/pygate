@@ -26,9 +26,16 @@ import logging
 import os
 
 pygate = Flask(__name__)
-#cache = Cache(pygate, config={'CACHE_TYPE': 'redis'})
 CORS(pygate)
 logging.basicConfig(level=logging.INFO)
+
+cache = Cache(pygate, config={
+    'CACHE_TYPE': 'redis',
+    'CACHE_REDIS_HOST': os.getenv("REDIS_HOST"),
+    'CACHE_REDIS_PORT': os.getenv("REDIS_PORT"),
+    'CACHE_REDIS_DB': os.getenv("REDIS_DB"),
+    'CACHE_DEFAULT_TIMEOUT': 300
+})
 
 load_dotenv()
 
