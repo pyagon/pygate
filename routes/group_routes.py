@@ -6,14 +6,18 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# External imports
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
+# Internal imports
 from services.group_service import GroupService
 from utils.role_util import role_required
 
 group_bp = Blueprint('group', __name__)
 
+
+# Start role based endpoints
 
 @group_bp.route('', methods=['POST'])
 @jwt_required()
@@ -91,5 +95,7 @@ def get_group(group_name):
         return jsonify({group}), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+
+# End role based endpoints
 
 # End of file

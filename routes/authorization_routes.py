@@ -6,9 +6,11 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# External imports
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 
+# Internal imports
 from services.user_service import UserService
 
 authorization_bp = Blueprint('authorization', __name__)

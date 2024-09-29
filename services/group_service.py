@@ -6,7 +6,9 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# Internal imports
 from utils.database import db
+from utils.cache import cache_manager
 
 
 class GroupService:
@@ -22,6 +24,7 @@ class GroupService:
         GroupService.group_collection.insert_one(data)
 
     @staticmethod
+    @cache_manager.get_cache().cached(timeout=300, query_string=True)
     def group_exists(data):
         """
         Check if a group exists.
@@ -31,6 +34,7 @@ class GroupService:
         return False
 
     @staticmethod
+    @cache_manager.get_cache().cached(timeout=300, query_string=True)
     def get_groups():
         """
         Get all groups.
@@ -38,6 +42,7 @@ class GroupService:
         return GroupService.group_collection.find_all()
 
     @staticmethod
+    @cache_manager.get_cache().cached(timeout=300, query_string=True)
     def get_group(group_name):
         """
         Get a group by name.

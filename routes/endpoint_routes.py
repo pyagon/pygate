@@ -6,14 +6,18 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# External imports
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
+# Internal imports
 from services.endpoint_service import EndpointService
 from utils.role_util import role_required
 
 endpoint_bp = Blueprint('endpoint', __name__)
 
+
+# Start role based endpoints
 
 @endpoint_bp.route('', methods=['POST'])
 @jwt_required()
@@ -67,5 +71,7 @@ def get_endpoints_by_name_version(api_id):
         return jsonify({endpoints}), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+    
+# End role based endpoints
 
 # End of file

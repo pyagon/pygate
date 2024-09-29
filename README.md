@@ -10,7 +10,7 @@ Though pygate is currently a side project in development, please feel free to co
 
 ## Installation
 
-Ensure you have a MongoDB server running (locally for now)
+Ensure you have a MongoDB server and redis running (locally for now).
 
 Install requirements
 
@@ -21,13 +21,13 @@ Install requirements
 Start pygate
     
 ```bash
-  python start_pygate.py
+  python pygate.py start
 ```
 
 Stop pygate
     
 ```bash
-  python start_pygate.py
+  python pygate.py stop
 ```
 
 

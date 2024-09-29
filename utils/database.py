@@ -6,11 +6,13 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# External imports
 from pymongo import MongoClient, IndexModel, ASCENDING
 from utils import password_util
-
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
 
 class Database:
     def __init__(self):

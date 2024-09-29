@@ -3,16 +3,20 @@ The contents of this file are property of pygate.org
 Review the Apache License 2.0 for valid authorization of use
 See https://github.com/pygate-dev/pygate for more information
 """
-from services.api_service import ApiService
+
 # Start of file
 
+# Internal imports
+from services.api_service import ApiService
 from utils.database import db
+from utils.cache import cache_manager
 
 
 class SubscriptionService:
     subscriptions_collection = db.subscriptions
 
     @staticmethod
+    @cache_manager.get_cache().cached(timeout=300, query_string=True)
     def api_exists(api_name, api_version):
         """
         Check if an API exists.
@@ -20,11 +24,11 @@ class SubscriptionService:
         return ApiService.api_collection.find_one({'api_name': api_name, 'api_version': api_version})
 
     @staticmethod
-    def get_user_subscriptions(data):
+    @cache_manager.get_cache().cached(timeout=300, query_string=True)
+    def get_user_subscriptions(username):
         """
         Get user subscriptions.
         """
-        username = data.get('username')
         subscriptions = SubscriptionService.subscriptions_collection.find({'username': username})
         if not subscriptions:
             raise Exception('No subscriptions found for user')
