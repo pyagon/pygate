@@ -6,9 +6,11 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# External imports
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
+# Internal imports
 from services.subscription_service import SubscriptionService
 from utils.role_util import role_required
 
@@ -70,7 +72,7 @@ def unsubscribe_api():
 @subscription_bp.route('/subscriptions/<user_id>', methods=['GET'])
 @jwt_required()
 @role_required(("admin", "dev", "platform"))
-def subscriptions_for_current_user(user_id):
+def subscriptions_for_user_by_id(user_id):
     """
     Get API Subscriptions for user by id *platform endpoint.
     Request:

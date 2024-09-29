@@ -6,9 +6,11 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# External imports
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
+# Internal imports
 from services.user_service import UserService
 from utils.role_util import role_required
 

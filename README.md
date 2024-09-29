@@ -21,13 +21,13 @@ Install requirements
 Start pygate
     
 ```bash
-  python start_pygate.py
+  python pygate.py start
 ```
 
 Stop pygate
     
 ```bash
-  python start_pygate.py
+  python pygate.py stop
 ```
 
 

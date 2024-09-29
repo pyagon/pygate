@@ -6,9 +6,11 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# External imports
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required
 
+# Internal imports
 from utils.subscription_util import subscription_required
 
 gateway_bp = Blueprint('gateway', __name__)

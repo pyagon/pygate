@@ -6,6 +6,7 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# External imports
 import bcrypt
 
 

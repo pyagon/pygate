@@ -6,8 +6,9 @@ See https://github.com/pygate-dev/pygate for more information
 
 # Start of file
 
+# Internal imports
 from utils.database import db
-from pygate import cache
+from utils.cache import cache_manager
 
 
 class ApiService:
@@ -23,7 +24,7 @@ class ApiService:
         ApiService.api_collection.insert_one(data)
 
     @staticmethod
-    @cache.cached(timeout=300, query_string=True)
+    @cache_manager.get_cache().cached(timeout=300, query_string=True)
     def get_api_by_name_version(api_name, api_version):
         """
         Get an API by name and version.
