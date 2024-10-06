@@ -16,9 +16,7 @@ from utils.role_util import role_required
 
 role_bp = Blueprint('role', __name__)
 
-
 # Start role based endpoints
-
 @role_bp.route('', methods=['POST'])
 @jwt_required()
 @role_required(("admin", "dev", "platform"))

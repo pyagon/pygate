@@ -14,7 +14,6 @@ from flask_jwt_extended import get_jwt_identity
 # Internal imports
 from services.subscription_service import SubscriptionService
 
-
 def subscription_required():
     def decorator(f):
         @wraps(f)

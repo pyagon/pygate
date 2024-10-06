@@ -10,7 +10,6 @@ See https://github.com/pygate-dev/pygate for more information
 from utils.database import db
 from utils.cache import cache_manager
 
-
 class RoleService:
     role_collection = db.roles
 

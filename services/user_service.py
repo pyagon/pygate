@@ -14,7 +14,6 @@ from utils import password_util
 from utils.database import db
 from utils.cache import cache_manager
 
-
 class UserService:
     user_collection = db.users
 

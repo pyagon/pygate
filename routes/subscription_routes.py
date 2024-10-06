@@ -16,9 +16,7 @@ from utils.role_util import role_required
 
 subscription_bp = Blueprint('subscription', __name__)
 
-
 # Start role based endpoints
-
 @subscription_bp.route('/subscribe', methods=['POST'])
 @jwt_required()
 @role_required(("admin", "dev", "platform"))

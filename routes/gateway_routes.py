@@ -15,7 +15,6 @@ from utils.subscription_util import subscription_required
 
 gateway_bp = Blueprint('gateway', __name__)
 
-
 @gateway_bp.route('/', defaults={'path': ''}, methods=['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'])
 @gateway_bp.route('/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'])
 @jwt_required()

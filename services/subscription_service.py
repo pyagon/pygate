@@ -11,7 +11,6 @@ from services.api_service import ApiService
 from utils.database import db
 from utils.cache import cache_manager
 
-
 class SubscriptionService:
     subscriptions_collection = db.subscriptions
 

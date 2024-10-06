@@ -15,7 +15,6 @@ from services.user_service import UserService
 
 authorization_bp = Blueprint('authorization', __name__)
 
-
 @authorization_bp.route('/authorization', methods=['POST'])
 def authorization():
     """
